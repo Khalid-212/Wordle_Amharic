@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import './Hints.css';
 //
-function Hints({ rowCount }) {
+function Hints({ rowCount,col }) {
     const [hintList, setHintList] = useState([])
     useEffect(() => {
-        fetch(process.env.REACT_APP_REMOTE_HOST + '/random?limit=' + (25 / (rowCount + 1)))
+        fetch(process.env.REACT_APP_REMOTE_HOST + `/random?col=${col}&limit=` + (25 / (rowCount + 1)))
             .then(e => e.json())
             .then(e => {
                 if (e) setHintList(e)
             })
-    }, [rowCount])
+    }, [rowCount,col])
     return (
         <div className="hints">
             <details>
